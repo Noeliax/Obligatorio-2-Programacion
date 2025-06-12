@@ -1,0 +1,38 @@
+#banner {
+  display: block;
+  margin: 0 auto 10px;
+  width: 500px;
+}
+h1 {
+  text-align: center;
+}
+section {
+  margin: 10px 0 0;
+  background-color: #d5f4d5;
+  padding: 16px;
+  border-radius: 8px;
+}
+article {
+  background-color: #03ff7f;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 0 0 10px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+#tabla_inscriptos {
+  border-collapse: collapse;
+}
+#mapa {
+  height: 400px;
+}
+footer {
+  text-align: center;
+  background-color: #f0f4d4;
+  border-radius: 8px;
+  margin: 10px 0 0;
+  padding: 16px;
+}

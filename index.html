@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/estilos.css">
+  <title>Obligatorio 1</title>
+</head>
+<body>
+  <header>
+    <h1>Sitio de corredores</h1>
+    <img id="banner" src="img/banner.jpeg" alt="Corredores de Uruguay">
+    <div>
+      <button>Datos</button>
+      <button>Estadísticas</button>
+    </div>
+  </header>
+  <main>
+    <section>
+      <h2>Datos</h2>
+      <article>
+        <h3>Carreras</h3>
+        <form action="" method="post" id="form_carrera">
+          <label for="nombre_carrera">Nombre:</label>
+          <input type="text" id="nombre_carrera" name="nombre_carrera">
+          <label for="departamento">Departamento:</label>
+          <select id="departamento" name="departamento">
+            <option value="Montevideo">Montevideo</option>
+            <option value="Canelones">Canelones</option>
+            <option value="Maldonado">Maldonado</option>
+            <option value="Rocha">Rocha</option>
+            <option value="Treinta y Tres">Treinta y Tres</option>
+            <option value="Cerro Largo">Cerro Largo</option>
+            <option value="Rivera">Rivera</option>
+            <option value="Artigas">Artigas</option>
+            <option value="Salto">Salto</option>
+            <option value="Paysandú">Paysandú</option>
+            <option value="Rio Negro">Rio Negro</option>
+            <option value="Soriano">Soriano</option>
+            <option value="Colonia">Colonia</option>
+            <option value="San José">San José</option>
+            <option value="Flores">Flores</option>
+            <option value="Florida">Florida</option>
+            <option value="Lavalleja">Lavalleja</option>
+            <option value="Durazno">Durazno</option>
+            <option value="Tacuarembó">Tacuarembó</option>
+          </select>
+          <label for="fecha_carrera">Fecha:</label>
+          <input type="date" id="fecha_carrera" name="fecha_carrera">
+          <label for="cupo">Cupo:</label>
+          <input type="number" value="30" max="1000" min="1" id="cupo" name="cupo">
+          <button type="submit">Agregar Carrera</button>
+        </form>
+      </article>
+      <article>
+        <h3>Patrocinadores</h3>
+        <form action="" method="post" id="form_patrocinador">
+          <label for="nombre_patrocinado">Nombre:</label>
+          <input type="text" id="nombre_patrocinado" name="nombre_patrocinado">
+          <label for="rubro">Rubro:</label>
+          <select id="rubro" name="rubro">
+            <option value="Alimenticio">Alimenticio</option>
+            <option value="Banco">Banco</option>
+            <option value="Bebidas">Bebidas</option>
+            <option value="Farmacia">Farmacia</option>
+            <option value="Ropa Deportiva">Ropa Deportiva</option>
+            <option value="Estatal">Estatal</option>
+            <option value="General">General</option>
+          </select>
+          <label for="carreras_patrocinador">Carreras:</label>
+          <select id="carreras_patrocinador" name="carreras_patrocinador">
+          </select>
+          <button type="submit">Agregar/Actualizar Patrocinador</button>
+        </form>
+      </article>
+      <article>
+        <h3>Corredores</h3>
+        <form action="" method="post" id="form_corredor">
+          <label for="nombre_corredor">Nombre:</label>
+          <input type="text" id="nombre_corredor" name="nombre_corredor">
+          <label for="edad_corredor">Edad:</label>
+          <input type="number" min="18" id="edad_corredor" name="edad_corredor">
+          <label for="cedula_corredor">Cédula:</label>
+          <input type="number" id="cedula_corredor" name="cedula_corredor">
+          <label for="fecha_vencimiento">Fecha de vencimiento de ficha médica:</label>
+          <input type="date" id="fecha_vencimiento" name="fecha_vencimiento">
+          <label for="tipo_corredor">Tipo de corredor:
+            <input type="radio" name="tipo_corredor" value="Deportista de élite" >Deportista de élite
+            <input type="radio" name="tipo_corredor" value="Deportista común" checked>Deportista común
+          </label>
+
+          <button type="submit">Agregar Corredor</button>
+        </form>
+      </article>
+      <article>
+        <h3>Inscripciones</h3>
+        <form action="" method="post" id="form_inscripcion">
+          <label for="corredor_inscripcion">Corredores:</label>
+          <select id="corredor_inscripcion" name="corredor_inscripcion">
+          </select>
+          <label for="carrera_inscripcion">Carreras:</label>
+          <select id="carrera_inscripcion" name="carrera_inscripcion">
+          </select>
+          <button type="submit">Inscribir</button>
+        </form>
+      </article>
+    </section>
+
+    <section>
+      <h2>Estadísticas</h2>
+      <article>
+        <h3>Datos generales</h3>
+        <div>
+          <div>
+            <p>Promedio de inscriptos por carrera: <span id="promedio_inscriptos">sin datos</span></p>
+          </div>
+          <div>
+            <p>Carrera/s con más inscriptos:</p>
+            <ul id="carrera_mas_inscriptos">
+              <li>sin datos</li>
+            </ul>
+          </div>
+          <div>
+            <p>Carreras sin inscriptos ordenadas por fecha: </p>
+            <ul id="carrera_sin_inscriptos">
+              <li>sin datos</li>
+            </ul>
+          </div>
+          <div>
+            <p>Porcentaje de corredores de élite: <span id="promedio_inscriptos">sin datos</span></p>
+          </div>
+        </div>
+      </article>
+      <article>
+        <h3>Consulta inscriptos</h3>
+        <form action="" method="post" id="form_estadistica">
+          <label for="carrera_estadistica">Carrera:</label>
+          <select name="carrera_estadistica" id="carrera_estadistica">
+
+          </select>
+          <label for="orden">Ordenado por: 
+            <input type="radio" name="orden" value="Nombre" checked>Nombre
+            <input type="radio" name="orden" value="Número">Número
+          </label>
+        </form>
+        <p>Inscriptos</p>
+        <table border="1" id="tabla_inscriptos">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Edad</th>
+              <th>Cédula</th>
+              <th>Ficha médica</th>
+              <th>Número</th>
+            </tr>
+          </thead>
+          <tbody id="inscriptos">
+
+          </tbody>
+        </table>
+      </article>
+      <article id="mapa">
+        <h3>Visualizar mapa:</h3>
+        <form action="" method="post" id="form_mapa">
+          <label for="orden_mapa">
+            <input type="radio" name="orden_mapa" value="Por carreras" checked>Por carreras
+            <input type="radio" name="orden_mapa" value="Por inscripciones">Por inscripciones
+          </label>
+        </form>
+      </article>
+    </section>
+  </main>
+  <footer>
+    <p>Programación 1 - Obligatorio 1er semestre 2025 - Autores:</p>
+    <p>Grupo N1A ID - Camilo Ramírez (363781) - <a href="https://www.linkedin.com/in/camilo-ramirez-perdomo/" target="_blank">Link</a></p>
+    <p>Grupo N1A ID - Noelia López (358582) - <a href="https://www.ort.edu.uy/" target="_blank">Link</a></p>
+  </footer>
+</body>
+
+</html>
