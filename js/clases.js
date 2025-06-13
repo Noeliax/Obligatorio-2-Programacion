@@ -9,7 +9,7 @@ class Carrera {
 class Corredor {
 
 }
-class Inscripción {
+class Inscripcion {
 
 }
 class Patrocinador {

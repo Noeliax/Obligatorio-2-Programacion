@@ -37,3 +37,11 @@ footer {
   margin: 10px 0 0;
   padding: 16px;
 }
+
+.oculto {
+  display: none;
+}
+
+.activo {
+  background-color: #03ff7f;
+}
