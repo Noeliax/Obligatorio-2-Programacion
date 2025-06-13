@@ -26,8 +26,8 @@
         <form action="" method="post" id="form_carrera">
           <label for="nombre_carrera">Nombre:</label>
           <input type="text" id="nombre_carrera" name="nombre_carrera">
-          <label for="departamento">Departamento:</label>
-          <select id="departamento" name="departamento">
+          <label for="departamento_carrera">Departamento:</label>
+          <select id="departamento_carrera" name="departamento_carrera">
             <option value="Montevideo">Montevideo</option>
             <option value="Canelones">Canelones</option>
             <option value="Maldonado">Maldonado</option>
@@ -52,14 +52,14 @@
           <input type="date" id="fecha_carrera" name="fecha_carrera">
           <label for="cupo">Cupo:</label>
           <input type="number" value="30" max="1000" min="1" id="cupo" name="cupo">
-          <button type="submit">Agregar Carrera</button>
+				  <input type="button" id="boton_carrera" value="Agregar Carrera">
         </form>
       </article>
       <article>
         <h3>Patrocinadores</h3>
         <form action="" method="post" id="form_patrocinador">
-          <label for="nombre_patrocinado">Nombre:</label>
-          <input type="text" id="nombre_patrocinado" name="nombre_patrocinado">
+          <label for="nombre_patrocinador">Nombre:</label>
+          <input type="text" id="nombre_patrocinador" name="nombre_patrocinador">
           <label for="rubro">Rubro:</label>
           <select id="rubro" name="rubro">
             <option value="Alimenticio">Alimenticio</option>
@@ -71,9 +71,9 @@
             <option value="General">General</option>
           </select>
           <label for="carreras_patrocinador">Carreras:</label>
-          <select id="carreras_patrocinador" name="carreras_patrocinador">
+          <select multiple id="carreras_patrocinador" name="carreras_patrocinador">
           </select>
-          <button type="submit">Agregar/Actualizar Patrocinador</button>
+				  <input type="button" id="boton_patrocinador" value="Agregar/Actualizar Patrocinador">
         </form>
       </article>
       <article>
@@ -88,11 +88,11 @@
           <label for="fecha_vencimiento">Fecha de vencimiento de ficha médica:</label>
           <input type="date" id="fecha_vencimiento" name="fecha_vencimiento">
           <label for="tipo_corredor">Tipo de corredor:
-            <input type="radio" name="tipo_corredor" value="Deportista de élite" >Deportista de élite
-            <input type="radio" name="tipo_corredor" value="Deportista común" checked>Deportista común
+            <input type="radio" name="tipo_corredor" id="elite" value="Deportista de élite" >Deportista de élite
+            <input type="radio" name="tipo_corredor" id="comun" value="Deportista común" checked>Deportista común
           </label>
 
-          <button type="submit">Agregar Corredor</button>
+				  <input type="button" id="boton_corredor" value="Agregar Corredor">
         </form>
       </article>
       <article>

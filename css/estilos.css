@@ -13,6 +13,11 @@ section {
   padding: 16px;
   border-radius: 8px;
 }
+select[multiple] {
+  min-width: 30px;
+  min-height: 50px;
+  padding: 5px;
+}
 article {
   background-color: #03ff7f;
   padding: 16px;
