@@ -34,13 +34,22 @@ function cambiarSeccionEstadisticas() {
 
 function agregarElementoCarrera(nombre) {
   let selectPat = document.getElementById("carreras_patrocinador");
-  let selectIns = document.getElementById("carrera_inscripcion");
   let opcion = document.createElement("option");
   opcion.value = nombre;
   opcion.textContent = nombre;
 
   selectPat.appendChild(opcion);
-  selectIns.appendChild(opcion.cloneNode(true));
+}
+
+function actualizarCarreras(){
+  let selectCarreraInscripcion = document.getElementById("carrera_inscripcion");
+  selectCarreraInscripcion.innerHTML = ""; 
+  for(let car of sistema.carreras){
+    let opcion = document.createElement("option");
+    opcion.value = car.nombre;
+    opcion.textContent = car.nombre;
+    selectCarreraInscripcion.appendChild(opcion); 
+  }
 }
 
 function agregarCarrera() {
@@ -48,10 +57,13 @@ function agregarCarrera() {
   let departamento = document.getElementById("departamento_carrera").value;
   let fecha = document.getElementById("fecha_carrera").value;
   let cupo = document.getElementById("cupo").value;
-
+  
   let carrera = new Carrera(nombre, departamento, fecha, cupo);
-  sistema.agregarCarrera(carrera)
-  agregarElementoCarrera(nombre)
+  let fueAgregada = sistema.agregarCarrera(carrera);
+  if(fueAgregada){
+    actualizarCarreras();
+    agregarElementoCarrera(nombre);
+  }
 }
 
 function agregarPatrocinador() {
@@ -66,13 +78,16 @@ function agregarPatrocinador() {
   sistema.agregarPatrocinador(patrocinador);
 }
 
-function agregarElementoCorredor(nombre, cedula) {
+function actualizarCorredores() {
   let selectCorredor = document.getElementById("corredor_inscripcion");
-  let opcion = document.createElement("option");
-  opcion.value = cedula;
-  opcion.textContent = nombre;
-
-  selectCorredor.appendChild(opcion);
+  selectCorredor.innerHTML = "";
+  for(let cor of sistema.corredores){
+    let opcion = document.createElement("option");
+    opcion.value = cor.cedula;
+    opcion.textContent = `${cor.nombre} ${cor.cedula}`;
+    selectCorredor.appendChild(opcion);
+  }
+ 
 }
 
 function agregarCorredor() {
@@ -89,7 +104,7 @@ function agregarCorredor() {
   let corredor = new Corredor(nombre, edad, cedula, fechaFichaMedica, tipoDeCorredor);
   let fueAgregado = sistema.agregarCorredor(corredor);
   if (fueAgregado) {
-    agregarElementoCorredor(nombre, cedula);
+    actualizarCorredores();
   }
 }
 

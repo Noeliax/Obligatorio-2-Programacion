@@ -25,9 +25,9 @@
         <h3>Carreras</h3>
         <form action="" method="post" id="form_carrera">
           <label for="nombre_carrera">Nombre:</label>
-          <input type="text" id="nombre_carrera" name="nombre_carrera">
+          <input type="text" id="nombre_carrera" name="nombre_carrera" required>
           <label for="departamento_carrera">Departamento:</label>
-          <select id="departamento_carrera" name="departamento_carrera">
+          <select id="departamento_carrera" name="departamento_carrera" required>
             <option value="Montevideo">Montevideo</option>
             <option value="Canelones">Canelones</option>
             <option value="Maldonado">Maldonado</option>
@@ -49,19 +49,19 @@
             <option value="Tacuarembó">Tacuarembó</option>
           </select>
           <label for="fecha_carrera">Fecha:</label>
-          <input type="date" id="fecha_carrera" name="fecha_carrera">
+          <input type="date" id="fecha_carrera" name="fecha_carrera" required>
           <label for="cupo">Cupo:</label>
-          <input type="number" value="30" max="1000" min="1" id="cupo" name="cupo">
-				  <input type="button" id="boton_carrera" value="Agregar Carrera">
+          <input type="number" value="30" max="1000" min="1" id="cupo" name="cupo" required>
+				  <input type="submit" id="boton_carrera" value="Agregar Carrera">
         </form>
       </article>
       <article>
         <h3>Patrocinadores</h3>
         <form action="" method="post" id="form_patrocinador">
           <label for="nombre_patrocinador">Nombre:</label>
-          <input type="text" id="nombre_patrocinador" name="nombre_patrocinador">
+          <input type="text" id="nombre_patrocinador" name="nombre_patrocinador" required>
           <label for="rubro">Rubro:</label>
-          <select id="rubro" name="rubro">
+          <select id="rubro" name="rubro" required>
             <option value="Alimenticio">Alimenticio</option>
             <option value="Banco">Banco</option>
             <option value="Bebidas">Bebidas</option>
@@ -71,40 +71,36 @@
             <option value="General">General</option>
           </select>
           <label for="carreras_patrocinador">Carreras:</label>
-          <select multiple id="carreras_patrocinador" name="carreras_patrocinador">
-          </select>
-				  <input type="button" id="boton_patrocinador" value="Agregar/Actualizar Patrocinador">
+          <select multiple id="carreras_patrocinador" name="carreras_patrocinador" required></select>
+				  <input type="submit" id="boton_patrocinador" value="Agregar/Actualizar Patrocinador">
         </form>
       </article>
       <article>
         <h3>Corredores</h3>
         <form action="" method="post" id="form_corredor">
           <label for="nombre_corredor">Nombre:</label>
-          <input type="text" id="nombre_corredor" name="nombre_corredor">
+          <input type="text" id="nombre_corredor" name="nombre_corredor" required>
           <label for="edad_corredor">Edad:</label>
-          <input type="number" min="18" id="edad_corredor" name="edad_corredor">
+          <input type="number" min="18" id="edad_corredor" name="edad_corredor" required>
           <label for="cedula_corredor">Cédula:</label>
-          <input type="number" id="cedula_corredor" name="cedula_corredor">
+          <input type="number" id="cedula_corredor" name="cedula_corredor" required>
           <label for="fecha_vencimiento">Fecha de vencimiento de ficha médica:</label>
-          <input type="date" id="fecha_vencimiento" name="fecha_vencimiento">
+          <input type="date" id="fecha_vencimiento" name="fecha_vencimiento" required>
           <label for="tipo_corredor">Tipo de corredor:
             <input type="radio" name="tipo_corredor" id="elite" value="Deportista de élite" >Deportista de élite
             <input type="radio" name="tipo_corredor" id="comun" value="Deportista común" checked>Deportista común
           </label>
-
-				  <input type="button" id="boton_corredor" value="Agregar Corredor">
+				  <input type="submit" id="boton_corredor" value="Agregar Corredor" required>
         </form>
       </article>
       <article>
         <h3>Inscripciones</h3>
         <form action="" method="post" id="form_inscripcion">
           <label for="corredor_inscripcion">Corredores:</label>
-          <select id="corredor_inscripcion" name="corredor_inscripcion">
-          </select>
+          <select id="corredor_inscripcion" name="corredor_inscripcion" required></select>
           <label for="carrera_inscripcion">Carreras:</label>
-          <select id="carrera_inscripcion" name="carrera_inscripcion">
-          </select>
-          <button type="submit">Inscribir</button>
+          <select id="carrera_inscripcion" name="carrera_inscripcion" required></select>
+          <input type="submit" id="boton_inscripcion" value="Inscribir">
         </form>
       </article>
     </section>
@@ -138,9 +134,7 @@
         <h3>Consulta inscriptos</h3>
         <form action="" method="post" id="form_estadistica">
           <label for="carrera_estadistica">Carrera:</label>
-          <select name="carrera_estadistica" id="carrera_estadistica">
-
-          </select>
+          <select name="carrera_estadistica" id="carrera_estadistica" required></select>
           <label for="orden">Ordenado por: 
             <input type="radio" name="orden" value="Nombre" checked>Nombre
             <input type="radio" name="orden" value="Número">Número

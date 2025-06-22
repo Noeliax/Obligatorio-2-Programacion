@@ -1,6 +1,8 @@
 // Camilo Ramírez (363781) Noelia López (358582)
+
+
 class Sistema {
-  constructor () {
+  constructor() {
     this.carreras = [];
     this.corredores = [];
     this.patrocinadores = [];
@@ -15,8 +17,12 @@ class Sistema {
       }
     }
     if (esValida) {
-      this.carreras.push(carrera)
+      this.carreras.push(carrera);
+      this.carreras.sort(function(a,b){
+        return a.nombre.localeCompare(b.nombre)
+      })
     }
+    return esValida;
   }
 
   agregarPatrocinador(patrocinador) {
@@ -43,25 +49,29 @@ class Sistema {
     }
     if (esValido) {
       this.corredores.push(corredor);
-      return true;
-    } else {
-      return false;
+      this.corredores.sort(function(a,b){
+        return a.nombre.localeCompare(b.nombre)
+      })
     }
+    return esValido
   }
 
 }
 
 class Carrera {
-  constructor (nombre, departamento, fecha, cupo) {
+  constructor(nombre, departamento, fecha, cupo) {
     this.nombre = nombre;
     this.departamento = departamento;
     this.fecha = fecha;
     this.cupo = cupo;
   }
+  toString() {
+    return `${this.nombre} en ${this.departamento} el ${this.fecha} Cupo: ${this.cupo}`; // areglar Formato
+  }
 }
 
 class Patrocinador {
-  constructor (nombre, rubro, carreras) {
+  constructor(nombre, rubro, carreras) {
     this.nombre = nombre;
     this.rubro = rubro;
     this.carreras = carreras;
@@ -69,15 +79,22 @@ class Patrocinador {
 }
 
 class Corredor {
-  constructor (nombre, edad, cedula, fechaFichaMedica, tipoDeCorredor) {
+  constructor(nombre, edad, cedula, fechaFichaMedica, tipoDeCorredor) {
     this.nombre = nombre;
     this.edad = edad;
     this.cedula = cedula;
     this.fechaFichaMedica = fechaFichaMedica;
     this.tipoDeCorredor = tipoDeCorredor;
   }
+  toString(){
+    return `${this.nombre} ${this.edad} años, CI: ${this.cedula} Ficha Medica: ${this.fechaFichaMedica} ${this.tipoDeCorredor}` //arreglarFormato 
+  }
 }
 class Inscripcion {
-
+  constructor(numero, corredor, carrera){
+    this.numero = numero;
+    this.corredor = corredor; 
+    this.carrera = carrera; 
+  }
 }
 
