@@ -220,4 +220,4 @@ function actualizarConsultaInscriptos(){
   //hacer esto
 }
 
-//hacer coso mapa 
+//hacer coso mapa :)
