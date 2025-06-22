@@ -1,6 +1,5 @@
 // Camilo Ramírez (363781) Noelia López (358582)
 
-
 class Sistema {
   constructor() {
     this.carreras = [];
@@ -56,6 +55,9 @@ class Sistema {
     return esValido
   }
 
+  agregarInscripcion(inscripcion) {
+    this.inscripciones.push(inscripcion);
+  }
 }
 
 class Carrera {
