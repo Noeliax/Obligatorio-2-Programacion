@@ -5,7 +5,10 @@ let seccionActual = "datos_seccion";
 
 function config(){
   document.getElementById("boton_datos").addEventListener("click", cambiarSeccionDatos);
-  document.getElementById("boton_estadisticas").addEventListener("click", cambiarSeccionEstadisticas);
+  document.getElementById("boton_estadisticas").addEventListener("click", function() {
+    cambiarSeccionEstadisticas();
+    actualizarEstadisticas();
+  });
   document.getElementById("boton_carrera").addEventListener("click", agregarCarrera);
   document.getElementById("boton_patrocinador").addEventListener("click", agregarPatrocinador);
   document.getElementById("boton_corredor").addEventListener("click", agregarCorredor);
@@ -152,5 +155,69 @@ function agregarInscripcion(event) {
     `);
   }
 }
+// hacer lo del pdf
 
-// Todo estadisticas
+function actualizarEstadisticas() {
+  actualizarDatosGenerales();
+}
+
+function actualizarDatosGenerales() {
+  let promedioInsEl = document.getElementById("promedio_inscriptos");
+  if (!sistema.carreras.length) {
+    promedioInsEl.textContent = "sin datos";
+  } else {
+    promedioInsEl.textContent = (sistema.inscripciones.length / sistema.carreras.length).toFixed(2)
+  }
+  
+  let carrerasMasInscriptosEl = document.getElementById("carrera_mas_inscriptos");
+  carrerasMasInscriptosEl.innerHTML = "";
+  let masInscripciones = 0;
+  for(let ins of sistema.inscripciones){
+    if(ins.numero > masInscripciones){
+      masInscripciones = ins.numero;
+    }
+  }
+  let carrerasMasInscriptos = [];
+  for(let ins of sistema.inscripciones){
+    if(ins.numero === masInscripciones){
+      carrerasMasInscriptos.push(ins.carrera);
+    }
+  }
+  for(carrera of carrerasMasInscriptos){
+    let li = document.createElement("li");
+    li.textContent =`${carrera.toString()} inscriptos: ${masInscripciones}`;
+    carrerasMasInscriptosEl.appendChild(li);
+  }
+
+  let carrerasSinInscripcionesEl = document.getElementById("carrera_sin_inscriptos");
+  carrerasSinInscripcionesEl.innerHTML = "";
+  let carrerasSinInscripciones = sistema.carreras.filter(function(car){
+    return sistema.inscripciones.every(function(ins) {
+      return ins.carrera.nombre !== car.nombre;
+    })
+  })
+  carrerasSinInscripciones.sort(function(a, b) {
+   return a.fecha - b.fecha;
+  })
+  for(let car of carrerasSinInscripciones){
+    let li = document.createElement("li");
+    li.textContent = car.toString();
+    carrerasSinInscripcionesEl.appendChild(li);
+  }
+
+  let porcentajeEliteEl = document.getElementById("porcentaje_elite");
+  let totalElite = sistema.corredores.filter(function(cor) {
+    return cor.tipoDeCorredor === "Deportista de élite";
+  }).length;
+  if (sistema.corredores.length === 0) {
+    porcentajeEliteEl.textContent = "sin datos";
+  } else {
+    porcentajeEliteEl.textContent = `${(totalElite / sistema.corredores.length * 100).toFixed(2)}%`;
+  }
+}
+
+function actualizarConsultaInscriptos(){
+  //hacer esto
+}
+
+//hacer coso mapa 
