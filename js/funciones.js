@@ -145,17 +145,28 @@ function agregarInscripcion(event) {
     let patrocinadores = sistema.patrocinadores.filter(function(pat) {
       return pat.carreras.includes(carreraSeleccionada);
     });
-    alert(`
-      Número: ${inscripcion.numero}
-      Nombre: ${corredor.toString()}
-      Carrera: ${carrera.toString()}
-      ${patrocinadores.map(function(pat) {
-        return `${pat.nombre} (${pat.rubro})`;
-      }).join(", ")}
-    `);
+    let patrocinadoresText = patrocinadores.map(function(pat) {
+      return `${pat.nombre} (${pat.rubro})`;
+    }).join(", ")
+    alert(`Número: ${inscripcion.numero} \nNombre: ${corredor.toString()} \nCarrera: ${carrera.toString()} \n${patrocinadoresText}`);
+    crearPDF(inscripcion.numero, corredor.toString(), carrera.toString(), patrocinadoresText);
   }
 }
-// hacer lo del pdf
+
+function crearPDF(numero, corredor, carrera, patrocinadores) {
+  let ventana = window.open("", "", "width=600,height=400");
+  // Borrar si no es necesario
+  // ventana.document.head.innerHTML = "<style>@media print { p { color: blue; } }</style>"; 
+  ventana.document.body.innerHTML = `
+    <p>Número: ${numero}</p>
+    <p>Nombre: ${corredor}</p>
+    <p>Carrera: ${carrera}</p>
+    <p>${patrocinadores}</p>
+  `;
+  ventana.focus();
+  ventana.print();
+  ventana.close();
+}
 
 function actualizarEstadisticas() {
   actualizarDatosGenerales();
