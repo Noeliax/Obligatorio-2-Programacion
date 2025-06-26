@@ -67,8 +67,14 @@ class Carrera {
     this.fecha = fecha;
     this.cupo = cupo;
   }
+  obtenerFecha() {
+    let dia = this.fecha.getDate();
+    let mes = this.fecha.getMonth() + 1;
+    let ano = this.fecha.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  }
   toString() {
-    return `${this.nombre} en ${this.departamento} el ${this.fecha} Cupo: ${this.cupo}`; // areglar Formato
+    return `${this.nombre} en ${this.departamento} el ${this.obtenerFecha()} Cupo: ${this.cupo}`;
   }
 }
 
@@ -88,8 +94,14 @@ class Corredor {
     this.fechaFichaMedica = fechaFichaMedica;
     this.tipoDeCorredor = tipoDeCorredor;
   }
-  toString(){
-    return `${this.nombre} ${this.edad} años, CI: ${this.cedula} Ficha Medica: ${this.fechaFichaMedica} ${this.tipoDeCorredor}` //arreglarFormato 
+  obtenerFecha() {
+    let dia = this.fechaFichaMedica.getDate();
+    let mes = this.fechaFichaMedica.getMonth() + 1;
+    let ano = this.fechaFichaMedica.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  }
+  toString() {
+    return `${this.nombre} ${this.edad} años, CI: ${this.cedula} Ficha Medica: ${this.obtenerFecha()} ${this.tipoDeCorredor}`
   }
 }
 class Inscripcion {
