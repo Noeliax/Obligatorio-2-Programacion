@@ -13,6 +13,9 @@ function config(){
   document.getElementById("boton_patrocinador").addEventListener("click", agregarPatrocinador);
   document.getElementById("boton_corredor").addEventListener("click", agregarCorredor);
   document.getElementById("boton_inscripcion").addEventListener("click", agregarInscripcion);
+  document.getElementById("carrera_estadistica").addEventListener("change", cambiarCarreraEstadistica);
+  document.getElementById("orden_numero").addEventListener("change", cambiarCarreraEstadistica);
+  document.getElementById("orden_nombre").addEventListener("change", cambiarCarreraEstadistica);
 }
 
 // Darle una vuelta
@@ -178,7 +181,8 @@ function crearPDF(numero, corredor, carrera, patrocinadores) {
 
 function actualizarEstadisticas() {
   actualizarDatosGenerales();
-  dibujarMapa();  
+  actualizarConsultaInscriptos();
+  dibujarMapa();
 }
 
 function actualizarDatosGenerales() {
@@ -237,10 +241,58 @@ function actualizarDatosGenerales() {
 }
 
 function actualizarConsultaInscriptos(){
-  //hacer esto
+  let selectCarrera = document.getElementById("carrera_estadistica");
+  selectCarrera.innerHTML = "";
+  for(let car of sistema.carreras){
+    let opcion = document.createElement("option");
+    opcion.value = car.nombre;
+    opcion.textContent = car.nombre;
+    selectCarrera.appendChild(opcion);
+  }
+  let ordenadoPorNumero = document.getElementById("orden_numero").checked;
+  tablaInscriptos(ordenadoPorNumero);
 }
 
+function tablaInscriptos(ordenadoPorNumero = false) {
+  let selectCarrera = document.getElementById("carrera_estadistica");
+  let carreraSeleccionada = selectCarrera.value;
+  let tablaInscriptosEl = document.getElementById("inscriptos");
+  tablaInscriptosEl.innerHTML = "";
+  let inscriptos = sistema.inscripciones.filter(function(ins) {
+    return ins.carrera.nombre === carreraSeleccionada;
+  });
+  if (ordenadoPorNumero) {
+    inscriptos.sort(function(a, b) {
+      return a.numero - b.numero;
+    });
+  } else {
+    inscriptos.sort(function(a, b) {
+      return a.corredor.nombre.localeCompare(b.corredor.nombre);
+    });
+  }
+  for(let ins of inscriptos) {
+    let fila = tablaInscriptosEl.insertRow();
+    if(ins.corredor.tipoDeCorredor === "Deportista de élite") {
+      fila.classList.add("elite");
+    }
+    let celdaNombre = fila.insertCell();
+    celdaNombre.textContent = ins.corredor.nombre;
+    let celdaEdad = fila.insertCell();
+    celdaEdad.textContent = ins.corredor.edad;
+    let celdaCedula = fila.insertCell();
+    celdaCedula.textContent = ins.corredor.cedula;
+    let celdaFichaMedica = fila.insertCell();
+    celdaFichaMedica.textContent = ins.corredor.obtenerFecha();
+    let celdaNumero = fila.insertCell();
+    celdaNumero.textContent = ins.numero;
+    
+  }
+}
 
+function cambiarCarreraEstadistica() {
+  let ordenadoPorNumero = document.getElementById("orden_numero").checked;
+  tablaInscriptos(ordenadoPorNumero);
+}
 
 google.charts.load('current', {
   'packages': ['geochart']

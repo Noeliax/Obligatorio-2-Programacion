@@ -50,3 +50,7 @@ footer {
 .activo {
   background-color: #03ff7f;
 }
+
+tr.elite {
+  background-color: red;
+}
