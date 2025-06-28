@@ -56,33 +56,37 @@ function actualizarCarreras(){
   }
 }
 
-function agregarCarrera(event) {
-  event.preventDefault();
-  let nombre = document.getElementById("nombre_carrera").value;
-  let departamento = document.getElementById("departamento_carrera").value;
-  let fechaString = document.getElementById("fecha_carrera").value;
-  let cupo = document.getElementById("cupo").value;
+function agregarCarrera() {
+  let formCarrera = document.getElementById("form_carrera");
+  if (formCarrera.reportValidity()) {
+    let nombre = document.getElementById("nombre_carrera").value;
+    let departamento = document.getElementById("departamento_carrera").value;
+    let fechaString = document.getElementById("fecha_carrera").value;
+    let cupo = document.getElementById("cupo").value;
 
-  let fecha = new Date(fechaString);
-  let carrera = new Carrera(nombre, departamento, fecha, cupo);
-  let fueAgregada = sistema.agregarCarrera(carrera);
-  if(fueAgregada){
-    actualizarCarreras();
-    agregarElementoCarrera(nombre);
+    let fecha = new Date(fechaString);
+    let carrera = new Carrera(nombre, departamento, fecha, cupo);
+    let fueAgregada = sistema.agregarCarrera(carrera);
+    if(fueAgregada){
+      actualizarCarreras();
+      agregarElementoCarrera(nombre);
+    }
   }
 }
 
-function agregarPatrocinador(event) {
-  event.preventDefault();
-  let nombre = document.getElementById("nombre_patrocinador").value;
-  let rubro = document.getElementById("rubro").value;
-  let carreraElementos = document.getElementById("carreras_patrocinador").selectedOptions;
-  let carreras = [];
-  for (let elemento of carreraElementos) {
-    carreras.push(elemento.value);
+function agregarPatrocinador() {
+  let formPatrocinador = document.getElementById("form_patrocinador");
+  if (formPatrocinador.reportValidity()) {
+    let nombre = document.getElementById("nombre_patrocinador").value;
+    let rubro = document.getElementById("rubro").value;
+    let carreraElementos = document.getElementById("carreras_patrocinador").selectedOptions;
+    let carreras = [];
+    for (let elemento of carreraElementos) {
+      carreras.push(elemento.value);
+    }
+    let patrocinador = new Patrocinador(nombre, rubro, carreras);
+    sistema.agregarPatrocinador(patrocinador);
   }
-  let patrocinador = new Patrocinador(nombre, rubro, carreras);
-  sistema.agregarPatrocinador(patrocinador);
 }
 
 function actualizarCorredores() {
@@ -97,59 +101,63 @@ function actualizarCorredores() {
  
 }
 
-function agregarCorredor(event) {
-  event.preventDefault();
-  let nombre = document.getElementById("nombre_corredor").value;
-  let edad = document.getElementById("edad_corredor").value;
-  let cedula = document.getElementById("cedula_corredor").value;
-  let fechaFichaMedicaString = document.getElementById("fecha_vencimiento").value;
-  let tipoDeCorredor = "";
-  if (document.getElementById("elite").checked) {
-    tipoDeCorredor = "Deportista de élite";
-  } else {
-    tipoDeCorredor = "Deportista común";
-  }
-  let fechaFichaMedica = new Date(fechaFichaMedicaString);
-  let corredor = new Corredor(nombre, edad, cedula, fechaFichaMedica, tipoDeCorredor);
-  let fueAgregado = sistema.agregarCorredor(corredor);
-  if (fueAgregado) {
-    actualizarCorredores();
+function agregarCorredor() {
+  let formCorredor = document.getElementById("form_corredor");
+  if (formCorredor.reportValidity()) {
+    let nombre = document.getElementById("nombre_corredor").value;
+    let edad = document.getElementById("edad_corredor").value;
+    let cedula = document.getElementById("cedula_corredor").value;
+    let fechaFichaMedicaString = document.getElementById("fecha_vencimiento").value;
+    let tipoDeCorredor = "";
+    if (document.getElementById("elite").checked) {
+      tipoDeCorredor = "Deportista de élite";
+    } else {
+      tipoDeCorredor = "Deportista común";
+    }
+    let fechaFichaMedica = new Date(fechaFichaMedicaString);
+    let corredor = new Corredor(nombre, edad, cedula, fechaFichaMedica, tipoDeCorredor);
+    let fueAgregado = sistema.agregarCorredor(corredor);
+    if (fueAgregado) {
+      actualizarCorredores();
+    }
   }
 }
 
-function agregarInscripcion(event) {
-  event.preventDefault();
-  let corredorSeleccionado = document.getElementById("corredor_inscripcion").value;
-  let carreraSeleccionada = document.getElementById("carrera_inscripcion").value;
-  let corredor = sistema.corredores.find(function(cor) {
-    return cor.cedula === corredorSeleccionado;
-  });
-  let carrera = sistema.carreras.find(function(car) {
-    return car.nombre === carreraSeleccionada;
-  });
-  let numero = sistema.inscripciones.filter(function(ins) {
-    return ins.carrera.nombre === carreraSeleccionada;
-  }).length + 1;
-  let yaInscrito = sistema.inscripciones.some(function(ins) {
-    return ins.corredor.cedula === corredorSeleccionado && ins.carrera.nombre === carreraSeleccionada;
-  });
-  if (numero > carrera.cupo) {
-    alert("No hay cupo disponible para esta carrera.");
-  } else if (yaInscrito) {
-    alert("El corredor ya está inscrito en esta carrera.");
-  } else if (corredor.fechaFichaMedica <= carrera.fecha) {
-    alert("La ficha médica del corredor está vencida para esta carrera.");
-  } else {
-    let inscripcion = new Inscripcion(numero, corredor, carrera);
-    sistema.agregarInscripcion(inscripcion);
-    let patrocinadores = sistema.patrocinadores.filter(function(pat) {
-      return pat.carreras.includes(carreraSeleccionada);
+function agregarInscripcion() {
+  let formInscripcion = document.getElementById("form_inscripcion");
+  if (formInscripcion.reportValidity()) {
+    let corredorSeleccionado = document.getElementById("corredor_inscripcion").value;
+    let carreraSeleccionada = document.getElementById("carrera_inscripcion").value;
+    let corredor = sistema.corredores.find(function(cor) {
+      return cor.cedula === corredorSeleccionado;
     });
-    let patrocinadoresText = patrocinadores.map(function(pat) {
-      return `${pat.nombre} (${pat.rubro})`;
-    }).join(", ")
-    alert(`Número: ${inscripcion.numero} \nNombre: ${corredor.toString()} \nCarrera: ${carrera.toString()} \n${patrocinadoresText}`);
-    crearPDF(inscripcion.numero, corredor.toString(), carrera.toString(), patrocinadoresText);
+    let carrera = sistema.carreras.find(function(car) {
+      return car.nombre === carreraSeleccionada;
+    });
+    let numero = sistema.inscripciones.filter(function(ins) {
+      return ins.carrera.nombre === carreraSeleccionada;
+    }).length + 1;
+    let yaInscrito = sistema.inscripciones.some(function(ins) {
+      return ins.corredor.cedula === corredorSeleccionado && ins.carrera.nombre === carreraSeleccionada;
+    });
+    if (numero > carrera.cupo) {
+      alert("No hay cupo disponible para esta carrera.");
+    } else if (yaInscrito) {
+      alert("El corredor ya está inscrito en esta carrera.");
+    } else if (corredor.fechaFichaMedica <= carrera.fecha) {
+      alert("La ficha médica del corredor está vencida para esta carrera.");
+    } else {
+      let inscripcion = new Inscripcion(numero, corredor, carrera);
+      sistema.agregarInscripcion(inscripcion);
+      let patrocinadores = sistema.patrocinadores.filter(function(pat) {
+        return pat.carreras.includes(carreraSeleccionada);
+      });
+      let patrocinadoresText = patrocinadores.map(function(pat) {
+        return `${pat.nombre} (${pat.rubro})`;
+      }).join(", ")
+      alert(`Número: ${inscripcion.numero} \nNombre: ${corredor.toString()} \nCarrera: ${carrera.toString()} \n${patrocinadoresText}`);
+      crearPDF(inscripcion.numero, corredor.toString(), carrera.toString(), patrocinadoresText);
+    }
   }
 }
 
@@ -170,6 +178,7 @@ function crearPDF(numero, corredor, carrera, patrocinadores) {
 
 function actualizarEstadisticas() {
   actualizarDatosGenerales();
+  dibujarMapa();  
 }
 
 function actualizarDatosGenerales() {
@@ -231,4 +240,56 @@ function actualizarConsultaInscriptos(){
   //hacer esto
 }
 
-//hacer coso mapa :)
+
+
+google.charts.load('current', {
+  'packages': ['geochart']
+});
+
+google.charts.setOnLoadCallback(configurarMapa);
+
+function configurarMapa() {
+  let formMapa = document.getElementById("form_mapa");
+
+  formMapa.addEventListener("change", function () {
+    dibujarMapa();
+  });
+
+  dibujarMapa();
+}
+
+function dibujarMapa() {
+  let opcion = document.querySelector('input[name="orden_mapa"]:checked').value;
+
+  let conteo = {};
+
+  if (opcion === "Por carreras") {
+    for (let carrera of sistema.carreras) {
+      let depto = carrera.departamento;
+      conteo[depto] = (conteo[depto] || 0) + 1;
+    }
+  } else {
+    for (let inscripcion of sistema.inscripciones) {
+      let depto = inscripcion.carrera.departamento;
+      conteo[depto] = (conteo[depto] || 0) + 1;
+    }
+  }
+
+  let datos = [['Departamento', 'Cantidad']];
+  for (let depto in conteo) {
+    datos.push([depto, conteo[depto]]);
+  }
+
+  let data = google.visualization.arrayToDataTable(datos);
+
+  let options = {
+    region: 'UY',
+    resolution: 'provinces',
+    displayMode: 'regions',
+    colorAxis: { colors: ['#f0f9e8', '#0868ac'] },
+    tooltip: { isHtml: true }
+  };
+
+  let chart = new google.visualization.GeoChart(document.getElementById('mapa'));
+  chart.draw(data, options);
+}

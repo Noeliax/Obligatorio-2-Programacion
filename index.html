@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/estilos.css">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="js/clases.js"></script>
   <script src="js/funciones.js"></script>
   <title>Obligatorio 1</title>
@@ -52,7 +53,7 @@
           <input type="date" id="fecha_carrera" name="fecha_carrera" required>
           <label for="cupo">Cupo:</label>
           <input type="number" value="30" max="1000" min="1" id="cupo" name="cupo" required>
-				  <input type="submit" id="boton_carrera" value="Agregar Carrera">
+				  <input type="button" id="boton_carrera" value="Agregar Carrera">
         </form>
       </article>
       <article>
@@ -72,7 +73,7 @@
           </select>
           <label for="carreras_patrocinador">Carreras:</label>
           <select multiple id="carreras_patrocinador" name="carreras_patrocinador" required></select>
-				  <input type="submit" id="boton_patrocinador" value="Agregar/Actualizar Patrocinador">
+				  <input type="button" id="boton_patrocinador" value="Agregar/Actualizar Patrocinador">
         </form>
       </article>
       <article>
@@ -90,7 +91,7 @@
             <input type="radio" name="tipo_corredor" id="elite" value="Deportista de élite" >Deportista de élite
             <input type="radio" name="tipo_corredor" id="comun" value="Deportista común" checked>Deportista común
           </label>
-				  <input type="submit" id="boton_corredor" value="Agregar Corredor" required>
+				  <input type="button" id="boton_corredor" value="Agregar Corredor" required>
         </form>
       </article>
       <article>
@@ -100,7 +101,7 @@
           <select id="corredor_inscripcion" name="corredor_inscripcion" required></select>
           <label for="carrera_inscripcion">Carreras:</label>
           <select id="carrera_inscripcion" name="carrera_inscripcion" required></select>
-          <input type="submit" id="boton_inscripcion" value="Inscribir">
+          <input type="button" id="boton_inscripcion" value="Inscribir">
         </form>
       </article>
     </section>
@@ -156,7 +157,7 @@
           </tbody>
         </table>
       </article>
-      <article id="mapa">
+      <article id="mapa_contenedor">       
         <h3>Visualizar mapa:</h3>
         <form action="" method="post" id="form_mapa">
           <label for="orden_mapa">
@@ -164,6 +165,7 @@
             <input type="radio" name="orden_mapa" value="Por inscripciones">Por inscripciones
           </label>
         </form>
+        <div id="mapa"></div>
       </article>
     </section>
   </main>

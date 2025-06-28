@@ -32,7 +32,7 @@ form {
 #tabla_inscriptos {
   border-collapse: collapse;
 }
-#mapa {
+#mapa_contenedor {
   height: 400px;
 }
 footer {
