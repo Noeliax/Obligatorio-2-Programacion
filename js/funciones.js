@@ -147,7 +147,7 @@ function agregarInscripcion() {
       alert("No hay cupo disponible para esta carrera.");
     } else if (yaInscrito) {
       alert("El corredor ya está inscrito en esta carrera.");
-    } else if (corredor.fechaFichaMedica <= carrera.fecha) {
+    } else if (corredor.fechaFichaMedica < carrera.fecha) {
       alert("La ficha médica del corredor está vencida para esta carrera.");
     } else {
       let inscripcion = new Inscripcion(numero, corredor, carrera);
@@ -166,8 +166,6 @@ function agregarInscripcion() {
 
 function crearPDF(numero, corredor, carrera, patrocinadores) {
   let ventana = window.open("", "", "width=600,height=400");
-  // Borrar si no es necesario
-  // ventana.document.head.innerHTML = "<style>@media print { p { color: blue; } }</style>"; 
   ventana.document.body.innerHTML = `
     <p>Número: ${numero}</p>
     <p>Nombre: ${corredor}</p>
@@ -302,19 +300,15 @@ google.charts.setOnLoadCallback(configurarMapa);
 
 function configurarMapa() {
   let formMapa = document.getElementById("form_mapa");
-
   formMapa.addEventListener("change", function () {
     dibujarMapa();
   });
-
   dibujarMapa();
 }
 
 function dibujarMapa() {
   let opcion = document.querySelector('input[name="orden_mapa"]:checked').value;
-
   let conteo = {};
-
   if (opcion === "Por carreras") {
     for (let carrera of sistema.carreras) {
       let depto = carrera.departamento;
@@ -326,12 +320,10 @@ function dibujarMapa() {
       conteo[depto] = (conteo[depto] || 0) + 1;
     }
   }
-
   let datos = [['Departamento', 'Cantidad']];
   for (let depto in conteo) {
     datos.push([depto, conteo[depto]]);
   }
-
   let data = google.visualization.arrayToDataTable(datos);
 
   let options = {
